@@ -35,7 +35,7 @@ export function Sidebar() {
     <aside className="w-60 flex-shrink-0 bg-zinc-900 flex flex-col h-full">
       <div className="px-6 py-6">
         <span className="text-zinc-100 font-semibold text-lg tracking-tight">
-          Telo<span className="text-emerald-400">Hive</span>
+          Space<span className="text-emerald-400">Base</span>
         </span>
       </div>
 
