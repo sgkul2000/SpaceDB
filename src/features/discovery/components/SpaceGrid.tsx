@@ -1,11 +1,12 @@
 "use client";
 
-import { useMemo, useRef, Suspense } from "react";
+import { useMemo, useRef, useState, useEffect, Suspense } from "react";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import { Search, X } from "lucide-react";
 import type { Space } from "@/types/space";
 import { useFiltersFromUrl } from "@/features/discovery/hooks/useFiltersFromUrl";
 import { applyFilters, sortSpaces } from "@/features/discovery/lib/filters";
+import { useDebounce } from "@/hooks/useDebounce";
 import { FilterPanel } from "./FilterPanel";
 import { SpaceCard } from "./SpaceCard";
 
@@ -16,6 +17,18 @@ const GAP = 20;
 function Grid({ spaces }: { spaces: Space[] }) {
   const { filters, setFilters, resetFilters } = useFiltersFromUrl();
   const containerRef = useRef<HTMLDivElement>(null);
+
+  const [searchInput, setSearchInput] = useState(filters.search);
+  const debouncedSearch = useDebounce(searchInput, 300);
+
+  useEffect(() => {
+    setFilters({ search: debouncedSearch });
+  }, [debouncedSearch]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // keep local input in sync if filters are reset externally
+  useEffect(() => {
+    setSearchInput(filters.search);
+  }, [filters.search]);
 
   const filtered = useMemo(() => {
     const f = applyFilters(spaces, filters);
@@ -54,13 +67,13 @@ function Grid({ spaces }: { spaces: Space[] }) {
             <input
               type="text"
               placeholder="Search spaces or cities…"
-              value={filters.search}
-              onChange={e => setFilters({ search: e.target.value })}
+              value={searchInput}
+              onChange={e => setSearchInput(e.target.value)}
               className="w-full bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder-zinc-500 text-sm rounded-lg pl-9 pr-8 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
             />
-            {filters.search && (
+            {searchInput && (
               <button
-                onClick={() => setFilters({ search: "" })}
+                onClick={() => setSearchInput("")}
                 aria-label="Clear search"
                 className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300 transition-colors"
               >
