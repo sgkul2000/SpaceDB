@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { api } from "@/lib/api";
+
+export const metadata: Metadata = { title: "Saved" };
 import { SavedGrid } from "@/features/saved/components/SavedGrid";
 
 export default async function SavedPage() {

@@ -39,15 +39,16 @@ export function RegisterForm() {
     <div className="bg-zinc-900 rounded-2xl p-8">
       <div className="mb-8">
         <h1 className="text-2xl font-semibold text-zinc-100">Create an account</h1>
-        <p className="text-zinc-400 mt-1 text-sm">Join TeloHive to discover spaces</p>
+        <p className="text-zinc-400 mt-1 text-sm">Join SpaceBase to discover spaces</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-4">
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label className="block text-sm text-zinc-300 mb-1.5">First name</label>
+            <label htmlFor="firstName" className="block text-sm text-zinc-300 mb-1.5">First name</label>
             <input
               {...register("firstName")}
+              id="firstName"
               type="text"
               autoComplete="given-name"
               className="w-full bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder-zinc-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
@@ -55,9 +56,10 @@ export function RegisterForm() {
             {errors.firstName && <p className="text-red-400 text-xs mt-1.5">{errors.firstName.message}</p>}
           </div>
           <div>
-            <label className="block text-sm text-zinc-300 mb-1.5">Last name</label>
+            <label htmlFor="lastName" className="block text-sm text-zinc-300 mb-1.5">Last name</label>
             <input
               {...register("lastName")}
+              id="lastName"
               type="text"
               autoComplete="family-name"
               className="w-full bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder-zinc-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
@@ -67,9 +69,10 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-zinc-300 mb-1.5">Email</label>
+          <label htmlFor="email" className="block text-sm text-zinc-300 mb-1.5">Email</label>
           <input
             {...register("email")}
+            id="email"
             type="email"
             autoComplete="email"
             placeholder="you@example.com"
@@ -79,11 +82,12 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-zinc-300 mb-1.5">
+          <label htmlFor="phone" className="block text-sm text-zinc-300 mb-1.5">
             Phone <span className="text-zinc-500">(optional)</span>
           </label>
           <input
             {...register("phone")}
+            id="phone"
             type="tel"
             autoComplete="tel"
             className="w-full bg-zinc-800 border border-zinc-700 text-zinc-100 placeholder-zinc-500 rounded-lg px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-colors"
@@ -91,10 +95,11 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-zinc-300 mb-1.5">Password</label>
+          <label htmlFor="password" className="block text-sm text-zinc-300 mb-1.5">Password</label>
           <div className="relative">
             <input
               {...register("password")}
+              id="password"
               type={showPw ? "text" : "password"}
               autoComplete="new-password"
               placeholder="••••••••"
@@ -113,10 +118,11 @@ export function RegisterForm() {
         </div>
 
         <div>
-          <label className="block text-sm text-zinc-300 mb-1.5">Confirm password</label>
+          <label htmlFor="confirmPassword" className="block text-sm text-zinc-300 mb-1.5">Confirm password</label>
           <div className="relative">
             <input
               {...register("confirmPassword")}
+              id="confirmPassword"
               type={showConfirm ? "text" : "password"}
               autoComplete="new-password"
               placeholder="••••••••"

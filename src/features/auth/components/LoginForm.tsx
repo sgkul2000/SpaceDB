@@ -47,7 +47,7 @@ export function LoginForm() {
     <div className="bg-zinc-900 rounded-2xl p-8">
       <div className="mb-8">
         <h1 className="text-2xl font-semibold text-zinc-100">Welcome back</h1>
-        <p className="text-zinc-400 mt-1 text-sm">Sign in to your TeloHive account</p>
+        <p className="text-zinc-400 mt-1 text-sm">Sign in to your SpaceBase account</p>
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5">

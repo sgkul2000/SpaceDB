@@ -1,10 +1,14 @@
+import type { Metadata } from "next";
 import { api } from "@/lib/api";
 import { DashboardView } from "@/features/dashboard/components/DashboardView";
 
+export const metadata: Metadata = { title: "Dashboard" };
+
 export default async function DashboardPage() {
-  const [bookings, saved] = await Promise.all([
+  const [bookings, saved, spaces] = await Promise.all([
     api.bookings.list().catch(() => null),
     api.saved.list().catch(() => []),
+    api.spaces.list().catch(() => []),
   ]);
 
   if (bookings === null) {
@@ -20,7 +24,7 @@ export default async function DashboardPage() {
       <div className="px-8 py-5 border-b border-zinc-800">
         <h1 className="text-xl font-semibold text-zinc-100">Dashboard</h1>
       </div>
-      <DashboardView bookings={bookings} savedCount={saved.length} />
+      <DashboardView bookings={bookings} savedCount={saved.length} totalSpaces={spaces.length} />
     </div>
   );
 }

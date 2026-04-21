@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { api } from "@/lib/api";
+
+export const metadata: Metadata = { title: "Discover" };
 import { SpaceGrid } from "@/features/discovery/components/SpaceGrid";
 
 export default async function DiscoveryPage() {

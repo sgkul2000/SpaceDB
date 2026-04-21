@@ -35,7 +35,7 @@ const bookings = Array.from({ length: 25 }, (_, i) => {
     id: i + 1,
     spaceId: space.id,
     spaceName: space.name,
-    date: faker.date.between({ from: "2024-01-01", to: "2025-06-30" }).toISOString().split("T")[0],
+    date: faker.date.between({ from: "2025-06-01", to: "2027-06-30" }).toISOString().split("T")[0],
     type: faker.helpers.arrayElement(["Full Day", "Half Day", "Hourly"]),
     status: faker.helpers.arrayElement(STATUSES),
     amount: faker.number.int({ min: 100, max: 8000 }),

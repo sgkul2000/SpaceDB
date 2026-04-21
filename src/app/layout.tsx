@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "TeloHive",
-  description: "Space discovery and booking dashboard",
+  title: { default: "SpaceBase", template: "%s · SpaceBase" },
+  description: "Find and book the perfect space for your next event.",
 };
 
 export default function RootLayout({

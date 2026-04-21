@@ -1,4 +1,7 @@
+import type { Metadata } from "next";
 import { api } from "@/lib/api";
+
+export const metadata: Metadata = { title: "Bookings" };
 import { BookingsTable } from "@/features/bookings/components/BookingsTable";
 
 export default async function BookingsPage() {
