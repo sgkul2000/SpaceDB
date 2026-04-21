@@ -2,7 +2,7 @@ import type { Space } from "@/types/space";
 import type { Booking } from "@/types/booking";
 import type { SavedSpace } from "@/types/saved";
 
-const BASE = "http://localhost:3001";
+const BASE = "/api";
 
 async function get<T>(path: string): Promise<T> {
   const res = await fetch(`${BASE}${path}`, { cache: "no-store" });

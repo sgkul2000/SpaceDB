@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
-
-export const metadata: Metadata = { title: "Saved" };
+import { getData } from "@/lib/data";
 import { SavedGrid } from "@/features/saved/components/SavedGrid";
 
-export default async function SavedPage() {
-  const spaces = await api.spaces.list().catch(() => null);
+export const metadata: Metadata = { title: "Saved" };
 
-  if (spaces === null) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-zinc-500 text-sm">Could not reach the API — is json-server running?</p>
-      </div>
-    );
-  }
+export default function SavedPage() {
+  const spaces = getData.spaces();
 
   return (
     <div className="h-full flex flex-col">

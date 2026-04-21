@@ -1,19 +1,11 @@
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
-
-export const metadata: Metadata = { title: "Bookings" };
+import { getData } from "@/lib/data";
 import { BookingsTable } from "@/features/bookings/components/BookingsTable";
 
-export default async function BookingsPage() {
-  const bookings = await api.bookings.list().catch(() => null);
+export const metadata: Metadata = { title: "Bookings" };
 
-  if (bookings === null) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-zinc-500 text-sm">Could not reach the API — is json-server running?</p>
-      </div>
-    );
-  }
+export default function BookingsPage() {
+  const bookings = getData.bookings();
 
   return (
     <div className="h-full flex flex-col">

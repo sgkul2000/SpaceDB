@@ -1,21 +1,11 @@
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
-
-export const metadata: Metadata = { title: "Discover" };
+import { getData } from "@/lib/data";
 import { SpaceGrid } from "@/features/discovery/components/SpaceGrid";
 
-export default async function DiscoveryPage() {
-  let spaces = await api.spaces.list().catch(() => null);
+export const metadata: Metadata = { title: "Discover" };
 
-  if (spaces === null) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-zinc-500 text-sm">
-          Could not reach the API — is json-server running on port 3001?
-        </p>
-      </div>
-    );
-  }
+export default function DiscoveryPage() {
+  const spaces = getData.spaces();
 
   return (
     <div className="h-full flex flex-col">

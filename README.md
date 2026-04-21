@@ -6,18 +6,19 @@ Space and venue discovery dashboard. Search, filter, save spaces, track bookings
 
 ## Running it
 
-Two terminals:
-
 ```bash
-npm run api   # json-server → http://localhost:3001
-npm run dev   # Next.js → http://localhost:3000
+npm run dev   # http://localhost:3000
 ```
+
+That's it — no separate API process needed. Data is served directly from `db.json` via Next.js API routes.
 
 If you want to reset the data:
 
 ```bash
 npm run generate  # rewrites db.json with fresh faker data
 ```
+
+json-server (`npm run api`) still works locally if you want full mutation persistence during development, but it's not required.
 
 Tests:
 

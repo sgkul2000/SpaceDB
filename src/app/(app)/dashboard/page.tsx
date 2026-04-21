@@ -1,23 +1,13 @@
 import type { Metadata } from "next";
-import { api } from "@/lib/api";
+import { getData } from "@/lib/data";
 import { DashboardView } from "@/features/dashboard/components/DashboardView";
 
 export const metadata: Metadata = { title: "Dashboard" };
 
-export default async function DashboardPage() {
-  const [bookings, saved, spaces] = await Promise.all([
-    api.bookings.list().catch(() => null),
-    api.saved.list().catch(() => []),
-    api.spaces.list().catch(() => []),
-  ]);
-
-  if (bookings === null) {
-    return (
-      <div className="flex items-center justify-center h-full">
-        <p className="text-zinc-500 text-sm">Could not reach the API — is json-server running?</p>
-      </div>
-    );
-  }
+export default function DashboardPage() {
+  const bookings = getData.bookings();
+  const saved = getData.saved();
+  const spaces = getData.spaces();
 
   return (
     <div className="h-full flex flex-col">
