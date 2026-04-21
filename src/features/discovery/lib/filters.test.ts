@@ -6,7 +6,7 @@ import {
   parseFilters,
   defaultFilters,
 } from "./filters";
-import type { Space } from "@/types/space";
+import type { Space, Category, Amenity } from "@/types/space";
 
 const base: Space = {
   id: 1,
@@ -164,13 +164,13 @@ describe("serializeFilters + parseFilters round-trip", () => {
   });
 
   it("round-trips categories", () => {
-    const f = { ...defaultFilters, categories: ["Studio", "Rooftop"] as const };
+    const f = { ...defaultFilters, categories: ["Studio", "Rooftop"] as Category[] };
     const parsed = parseFilters(serializeFilters(f));
     expect(parsed.categories).toEqual(["Studio", "Rooftop"]);
   });
 
   it("round-trips amenities", () => {
-    const f = { ...defaultFilters, amenities: ["WiFi", "Parking"] as const };
+    const f = { ...defaultFilters, amenities: ["WiFi", "Parking"] as Amenity[] };
     const parsed = parseFilters(serializeFilters(f));
     expect(parsed.amenities).toEqual(["WiFi", "Parking"]);
   });

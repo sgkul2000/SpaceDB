@@ -116,7 +116,32 @@ export function LoginForm() {
         </button>
       </form>
 
-      <p className="text-center text-sm text-zinc-400 mt-6">
+      <div className="mt-6">
+        <div className="flex items-center gap-3 mb-4">
+          <div className="flex-1 h-px bg-zinc-800" />
+          <span className="text-xs text-zinc-600">or continue with</span>
+          <div className="flex-1 h-px bg-zinc-800" />
+        </div>
+        <div className="grid grid-cols-3 gap-3">
+          {[
+            { label: "Google",    icon: "G" },
+            { label: "Microsoft", icon: "M" },
+            { label: "Apple",     icon: "A" },
+          ].map(({ label, icon }) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => signIn({ id: crypto.randomUUID(), firstName: "Guest", lastName: "", email: "guest@example.com" }, false)}
+              className="flex items-center justify-center gap-2 bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 text-zinc-300 text-sm rounded-lg px-3 py-2.5 transition-colors"
+            >
+              <span className="font-semibold text-xs">{icon}</span>
+              <span className="text-xs">{label}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <p className="text-center text-sm text-zinc-400 mt-5">
         No account?{" "}
         <Link href="/register" className="text-emerald-400 hover:text-emerald-300 transition-colors">
           Create one

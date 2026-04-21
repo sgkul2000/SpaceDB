@@ -19,8 +19,8 @@ export function SpaceCard({ space }: Props) {
   }, [load]);
 
   return (
-    <div className="bg-zinc-900 rounded-xl overflow-hidden ring-1 ring-zinc-800 hover:ring-zinc-600 transition-all group">
-      <div className="relative h-44 overflow-hidden">
+    <div className="bg-zinc-900 rounded-xl overflow-hidden ring-1 ring-zinc-800 hover:ring-zinc-600 transition-all group flex flex-col">
+      <div className="relative h-44 overflow-hidden flex-shrink-0">
         <img
           src={space.imageUrl}
           alt={space.name}
@@ -33,23 +33,33 @@ export function SpaceCard({ space }: Props) {
           aria-label={isSaved ? "Remove from saved" : "Save space"}
           className="absolute top-3 right-3 w-8 h-8 rounded-full bg-zinc-950/70 flex items-center justify-center hover:bg-zinc-950 transition-colors disabled:opacity-50"
         >
-          <Heart
-            size={15}
-            className={isSaved ? "fill-emerald-400 text-emerald-400" : "text-zinc-300"}
-          />
+          <Heart size={15} className={isSaved ? "fill-emerald-400 text-emerald-400" : "text-zinc-300"} />
         </button>
         <span className="absolute bottom-3 left-3 bg-zinc-950/70 text-zinc-200 text-xs px-2 py-1 rounded-md">
           {space.category}
         </span>
       </div>
 
-      <div className="p-4">
+      <div className="p-4 flex flex-col flex-1">
         <h3 className="text-zinc-100 font-medium text-sm leading-snug truncate">{space.name}</h3>
 
         <div className="flex items-center gap-1 mt-1.5 text-zinc-500 text-xs">
           <MapPin size={11} />
           <span>{space.city}</span>
         </div>
+
+        {space.amenities.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-2.5">
+            {space.amenities.slice(0, 3).map(a => (
+              <span key={a} className="bg-zinc-800 text-zinc-400 text-xs px-2 py-0.5 rounded-md">
+                {a}
+              </span>
+            ))}
+            {space.amenities.length > 3 && (
+              <span className="text-zinc-600 text-xs px-1 py-0.5">+{space.amenities.length - 3}</span>
+            )}
+          </div>
+        )}
 
         <div className="flex items-center justify-between mt-3">
           <div className="flex items-center gap-1 text-zinc-400 text-xs">
@@ -63,9 +73,14 @@ export function SpaceCard({ space }: Props) {
           </div>
         </div>
 
-        <div className="mt-3 pt-3 border-t border-zinc-800 flex items-center justify-between">
-          <span className="text-zinc-100 text-sm font-semibold">{formatPrice(space.price)}</span>
-          <span className="text-zinc-500 text-xs">/day</span>
+        <div className="mt-auto pt-3 border-t border-zinc-800 flex items-center justify-between mt-3">
+          <div>
+            <span className="text-zinc-100 text-sm font-semibold">{formatPrice(space.price)}</span>
+            <span className="text-zinc-500 text-xs ml-1">/day</span>
+          </div>
+          <button className="bg-emerald-500 hover:bg-emerald-400 text-zinc-950 text-xs font-medium px-3 py-1.5 rounded-lg transition-colors">
+            Book now
+          </button>
         </div>
       </div>
     </div>
